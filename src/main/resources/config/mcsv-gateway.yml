@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: mcsv-Gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          
+      routes:
+      - id: usuarios
+        uri: http://localhost:8094
+        predicates:
+        - Path = /api/Usuarios/**
+      - id: topicos
+        uri: http://localhost:8093
+        predicates:
+        - Path = /api/topico/**
+      - id: respustas
+        uri: http://localhost:8092
+        predicates:
+        - Path = /api/respuesta/**
+      - id: cursos
+        uri: http://localhost:8091
+        predicates:
+        - Path = /api/curso/**
+        
+eureka:
+  client:
+    register-with-eureka: false
